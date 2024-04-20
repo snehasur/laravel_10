@@ -8,7 +8,7 @@ git push -u origin main
 ============================
 Ep35 - Booking system in laravel
 1. Install laravel 
- - composer create-project laravel/laravel book2 "8.6.3"
+ - composer create-project laravel/laravel laravel_10 "10"
  - composer require laravel/ui 
  - php artisan ui bootstrap --auth
  - npm install && npm run dev
