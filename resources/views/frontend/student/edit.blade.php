@@ -6,7 +6,7 @@
     Student Update
   </div>
   <div class="card-body">
-    <form action="{{route('admin.students.update',$student->id)}}" method="post">
+    <form action="{{route('students.update',$student->id)}}" method="post">
         @csrf
         @method('Patch')
         <div class="form-row">
@@ -35,7 +35,7 @@
        
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
-        <form action="{{ url('/admin/students/'.$student->id) }}" method="post">@csrf
+        <form action="{{ url('/students/'.$student->id) }}" method="post">@csrf
           @method('DELETE')
           <button class="btn btn-danger" title="Delete" onclick="return confirm('Are you sure?')" data-toggle="tooltip" type="submit">Delete</button>
         </form>

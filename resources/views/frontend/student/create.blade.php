@@ -1,12 +1,13 @@
-@extends('backend.layout.layout')
+@extends('frontend.layout.layout')
 
 @section('space-work')
+
 <div class="card">
   <div class="card-header">
     Student Add
   </div>
   <div class="card-body">
-    <form action="{{route('admin.students.store')}}" method="post">
+    <form action="{{route('students.store')}}" method="post">
         @csrf
         <div class="form-row">
             <div class="form-group col-md-6">
@@ -19,6 +20,16 @@
             <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email" value="{{old('email')}}">
             @error('email')  <span style='color:red'>{{$errors->first('email')}}</span>  @enderror
           </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Password</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Password" name="password" value="{{old('password')}}">
+            @error('password')  <span style='color:red'>{{$errors->first('password')}}</span>  @enderror
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputConfirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" id="inputConfirmPassword" placeholder="Confirm Password" name="password_confirmation">
+            @error('password_confirmation')  <span style='color:red'>{{$errors->first('password_confirmation')}}</span>  @enderror
+        </div>
           <div class="form-group col-md-6">
             <label for="inputPhone">Phone</label>
             <input type="tel" class="form-control"  maxlength="11" minlength="11" id="inputPhone" placeholder="Phone" name="phone" value="{{old('phone')}}">

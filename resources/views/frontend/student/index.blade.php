@@ -1,4 +1,4 @@
-@extends('backend.layout.layout')
+@extends('frontend.layout.layout')
 
 @section('space-work')
 
@@ -6,14 +6,19 @@
     <div class="alert alert-success">
         {{ session('success') }}
     </div>
-@endif
+    @endif
+    @if (session('error'))
+    <div class="alert alert-error">
+        {{ session('error') }}
+    </div>
+    @endif
 <body>
     <div class="card">
     <div class="card-header">
       Student List
     </div>
     <br>
-        <a href="{{route('admin.students.create')}}"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button></a>                   
+        <a href="{{route('students.create')}}"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button></a>                   
         <div class="card-body">
             <table class="table table-bordered">
                 <thead>
@@ -35,9 +40,12 @@
                         <td>{{$student->phone}}</td>
                         <td>{{$student->address}}</td>
                         <td>
-                            <a href="{{ route('admin.students.show', $student->id) }}" class="view" title="View" data-toggle="tooltip"><i class="fa fa-eye"></i></a>
-                            <a href="{{ route('admin.students.edit', $student->id) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
-                           <form action="{{ route('admin.students.destroy', $student->id) }}" method="post">@csrf
+                            <a href="{{ url('/students/'.$student->id) }}" class="view" title="View" data-toggle="tooltip"><i class="fa fa-eye"></i></a>
+                            <a href="{{ url('/students/'.$student->id.'/edit') }}" class="edit" title="Edit" data-toggle="tooltip"><i class="fa fa-edit"></i></a>
+                            {{-- <a href="{{ route('student.show', $student->id) }}" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                            <a href="{{ route('student.edit', $student->id) }}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a> 
+                            <form action="{{ route('student.delete', $student->id) }}" method="post">--}}
+                            <form action="{{ url('/students/'.$student->id) }}" method="post">@csrf
                             @method('DELETE')
                             <button class="delete" title="Delete" onclick="return confirm('Are you sure?')" data-toggle="tooltip" type="submit"><i class="fa fa-trash"></i></button>
                             </form>

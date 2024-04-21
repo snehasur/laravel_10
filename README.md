@@ -6,25 +6,32 @@ git branch -M main
 git remote add origin git@github.com:snehasur/laravel_10.git
 git push -u origin main
 ============================
-Ep35 - Booking system in laravel
+Student Management System in laravel
+Day1 - 
 1. Install laravel 
- - composer create-project laravel/laravel laravel_10 "10"
- - composer require laravel/ui 
- - php artisan ui bootstrap --auth
- - npm install && npm run dev
- - npm run dev
+ - composer create-project laravel/laravel:^10.0 laravel_10
+ - cd example-app 
+ - php artisan serve
 2. Link the db with laravel folder
-3. understanding route in laravel - login and register file
-4. Convert login, register, book - html template to laravl blade
-5. create 2 controller for frontend and backend
- php artisan make:controller frontend -r
- php artisan make:controller backend -r
-Day2 - 
-6. Create model
- php artisan make:model customer -m
-7. create migration file for customers
-8. form validtion in register page
-9. send values from registr page to database
+3. Create student module
+ create controller
+ php artisan make:controller adminstudent -r
+ php artisan make:migration create_students_table
+4. Create model
+ php artisan make:model student -m
+5. create migration file for students
+6. form validtion in student page
+9. send values from student page to database
+10. complete crud with back button and message show(old value show on create,use name route)
+Day-2
+php artisan make:migration add_field_to_students_table --table=students
+php artisan make:model TeacherController -mcr
+php artisan make:middleware CheckStudentAuthentication
+
+
+
+
+
 10. after successfull acount creation - open login page
 11. check values of form of login page
 12. create session variable if login is correct and send user to dashboard
