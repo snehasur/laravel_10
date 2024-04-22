@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
+use Illuminate\Support\Facades\Hash;
+
 
 class AdminStudentController extends Controller
 {
@@ -31,13 +33,20 @@ class AdminStudentController extends Controller
     public function store(Request $request)
     {
         //
+        $password="12345678";
         $request->validate([
             'name' => 'required',   
             'email' => 'required|email',
-            'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',
+            'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
             'address' => 'required'
         ]);
-        Student::create($request->all());
+        Student::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($password),
+            'phone' => $request->phone,
+            'address' => $request->address
+        ]);
         return redirect()->route('admin.students.index')->with('success','Student created successfully.');
 
     }

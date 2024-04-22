@@ -27,7 +27,8 @@ Day-2
 php artisan make:migration add_field_to_students_table --table=students
 php artisan make:model TeacherController -mcr
 php artisan make:middleware CheckStudentAuthentication
-
+ php artisan route:list
+php artisan make:migration create_teachers_table 
 
 
 

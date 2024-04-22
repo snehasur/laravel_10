@@ -1,4 +1,4 @@
-@extends('backend.layout.layout')
+@extends('frontend.layout.layout')
 
 @section('space-work')    
 <div class="card">

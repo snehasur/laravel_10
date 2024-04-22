@@ -33,7 +33,7 @@
 
           
                 <li>
-                    <a href=""><span class="fa fa-users mr-3"></span> Home</a>
+                    <a href="{{route('dashboard.index')}}"><span class="fa fa-users mr-3"></span> Home</a>
                 </li>
                 <li>
                     <a href="{{route('admin.students.index')}}"><span class="fa fa-users mr-3"></span> Student</a>
@@ -49,18 +49,31 @@
                 </li>
                 <li>
                   <a href=""><span class="fa fa-users mr-3"></span> Payment</a>
-                </li>
-          
+                </li>         
 
-            <li>
-                <a href="/logout"><span class="fa fa-sign-out mr-3"></span> Logout</a>
-            </li>
+                <li>            
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                      @csrf
+                      <button type="submit" class="fa fa-sign-out mr-3">Logout</button>
+                  </form>              
+                </li>
         </ul>
 
     	</nav>
 
         <!-- Page Content  -->
             <div id="content" class="p-4 p-md-5 pt-5">
+              
+              @if (session('success'))
+              <div class="alert alert-success">
+                  {{ session('success') }}
+              </div>
+              @endif
+              @if (session('error'))
+              <div class="alert alert-error">
+                  {{ session('error') }}
+              </div>
+              @endif
               @yield('space-work')
             </div>
 		</div>

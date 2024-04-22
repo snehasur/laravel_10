@@ -105,6 +105,7 @@ class StudentController extends Controller
     }
     public function loginStudent()
     {        
+        //echo "f";die();
         return view('frontend.student.login');
     }
     public function loginSubmit(Request $request)
@@ -127,6 +128,11 @@ class StudentController extends Controller
             }else{
                 return redirect()->route('loginStudent')->with('error','invalid Credentials');
             }
+    
+            
+
+
+
      }
      public function logout()
      {

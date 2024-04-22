@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <style>
+    </style>
   </head>
   <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -22,10 +23,25 @@
       @if (Session::has('login'))
     {{-- User is logged in --}}
     <p>Welcome, </p>
-    <form method="POST" action="{{ route('students.logout') }}">
+    @if (Session::has('admin_id'))
+    <form method="POST" action="{{ route('admin.logout') }}">
         @csrf
         <button type="submit">Logout</button>
     </form>
+    @endif
+    @if (Session::has('student_id'))
+    <form method="POST" action="{{ route('students.logout') }}">
+      @csrf
+      <button type="submit">Logout</button>
+    </form>
+    @endif
+    @if (Session::has('teacher_id'))
+    <form method="POST" action="{{ route('teacher.logout') }}">
+      @csrf
+      <button type="submit">Logout</button>
+    </form>
+    @endif
+
 @else
     {{-- User is not logged in --}}
     <p>You are not logged in.</p>
@@ -34,7 +50,7 @@
         Login
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="">As Admin</a>
+        <a class="dropdown-item" href="{{route('loginAdmin')}}">As Admin</a>
         <a class="dropdown-item" href="{{route('loginStudent')}}">As Student</a>
         <a class="dropdown-item" href="#">As Teacher</a>
     </li>
@@ -56,7 +72,7 @@
     </form> --}}
   </div>
 </nav>
-			
+
 
 
         <!-- Page Content  -->

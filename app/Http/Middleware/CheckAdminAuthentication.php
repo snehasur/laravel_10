@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Session;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckStudentAuthentication
+class CheckAdminAuthentication
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,12 @@ class CheckStudentAuthentication
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session::has('student_id')) {
+        if (Session::has('admin_id')) {
             // User is authenticated, continue with the request
             return $next($request);
         }else{
            // return $next($request);
-            return redirect()->route('loginStudent')->with('error','Only Student can access.');
+            return redirect()->route('loginAdmin')->with('error','Only Admin can access.');
 
         }
 

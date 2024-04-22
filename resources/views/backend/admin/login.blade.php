@@ -13,10 +13,10 @@
 @endif
 <div class="card">
   <div class="card-header">
-    Student Login
+    Admin Login
   </div>
   <div class="card-body">
-    <form action="{{route('students.login')}}" method="post">
+    <form action="{{route('admin.login')}}" method="post">
         @csrf
         <div class="form-row">
 
