@@ -14,8 +14,12 @@ class AdminStudentController extends Controller
      */
     public function index()
     {
+        try{
         $students = Student::all();
         return view('backend.student.index', ['students' => $students]);
+        } catch (\Exception $e) {
+            echo $e->getMessage();       
+        }
     }
 
     /**
@@ -33,21 +37,26 @@ class AdminStudentController extends Controller
     public function store(Request $request)
     {
         //
-        $password="12345678";
-        $request->validate([
-            'name' => 'required',   
-            'email' => 'required|email|unique:students',
-            'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
-            'address' => 'required'
-        ]);
-        Student::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($password),
-            'phone' => $request->phone,
-            'address' => $request->address
-        ]);
-        return redirect()->route('admin.students.index')->with('success','Student created successfully.');
+        try{
+        
+            $password="12345678";
+            $request->validate([
+                'name' => 'required',   
+                'email' => 'required|email|unique:students',
+                'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
+                'address' => 'required'
+            ]);
+            Student::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($password),
+                'phone' => $request->phone,
+                'address' => $request->address
+            ]);
+            return redirect()->route('admin.students.index')->with('success','Student created successfully.');
+        } catch (\Exception $e) {
+            echo $e->getMessage();       
+        }
 
     }
 

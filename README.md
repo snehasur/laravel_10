@@ -66,6 +66,7 @@ need to do-
 use observers for mail send after register
 image uplode
 csv uplode 
+how to
 -->
 
 
@@ -116,4 +117,18 @@ Day 4
 33. create middleware for admin dashboard
 
 
+1.
+https://www.honeybadger.io/blog/advanced-error-handling-in-laravel/
+2.
+$validator = Validator::make($request->all(), [
 
+if ($validator->fails()) {
+                return response()->json([
+                    'status' => 0,
+                    'error' => $validator->errors()->toArray(),
+                    'message' => "Validation Error!!"
+                ], 400);
+            } else {
+
+3.helper diye duration month
+4.redis cache

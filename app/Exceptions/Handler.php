@@ -28,3 +28,29 @@ class Handler extends ExceptionHandler
         });
     }
 }
+
+// namespace App\Exceptions;
+
+// use Exception;
+// use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+// use Illuminate\Http\Request;
+// use Symfony\Component\HttpFoundation\Response;
+
+// class Handler extends ExceptionHandler
+// {
+//     public function render($request, \Throwable $exception)
+//     {
+//         // Custom exception handling logic
+//         if ($exception instanceof CustomException) {
+//             return response()->view('errors.custom', [], 500);
+//         }
+
+//         // Handle specific exceptions differently
+//         if ($exception instanceof ModelNotFoundException) {
+//             return response()->view('errors.404', [], 404);
+//         }
+
+//         // Default exception handling
+//         return parent::render($request, $exception);
+//     }
+// }
