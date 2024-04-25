@@ -35,7 +35,7 @@ class StudentController extends Controller
         //
         $request->validate([
             'name' => 'required',   
-            'email' => 'required|email',
+            'email' => 'required|email|unique:students',
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
             'address' => 'required'
@@ -103,10 +103,16 @@ class StudentController extends Controller
         // $student->delete();
         // return redirect()->route('students.index')->with('success','Student deleted successfully.');
     }
+    /**
+     * login page load for student.
+     */
     public function loginStudent()
     {        
         return view('frontend.student.login');
     }
+    /**
+     * login for student
+     */
     public function loginSubmit(Request $request)
      {
 
@@ -128,6 +134,9 @@ class StudentController extends Controller
                 return redirect()->route('loginStudent')->with('error','invalid Credentials');
             }
      }
+      /**
+     * logout for student
+     */
      public function logout()
      {
         Session::forget('student_id');

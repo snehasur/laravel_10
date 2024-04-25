@@ -5,6 +5,11 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\AdminStudentController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminTeachersController;
+use App\Http\Controllers\AdminCoursesController;
+use App\Http\Controllers\AdminBatchsController;
+use App\Http\Controllers\AdminEnrollmentsController;
+use App\Http\Controllers\AdminStudentPaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,11 +41,20 @@ Route::group(['prefix' => 'admin','middleware' => 'admin'],function () {
     Route::post('students', [AdminStudentController::class, 'store'])->name('admin.students.store');
     Route::get('students/{student}', [AdminStudentController::class, 'show'])->name('admin.students.show');
     Route::get('students/{student}/edit', [AdminStudentController::class, 'edit'])->name('admin.students.edit');
-    Route::put('students/{student}', [AdminStudentController::class, 'update'])->name('admin.students.update');
+    Route::patch('students/{student}', [AdminStudentController::class, 'update'])->name('admin.students.update');
     Route::delete('students/{student}', [AdminStudentController::class, 'destroy'])->name('admin.students.destroy');
 
     Route::post('/logout/admin', [UserController::class, 'logout'])->name('admin.logout');
     Route::resource('dashboard', UserController::class);
+    Route::resource('teachers', AdminTeachersController::class);
+    Route::resource('courses', AdminCoursesController::class);
+    Route::resource('batches', AdminBatchsController::class);
+    Route::resource('enrollments', AdminEnrollmentsController::class);
+    Route::get('enrollments/payment/student/{enrollment_id}', [AdminStudentPaymentController::class, 'payment'])->name('admin.student.payment');
+    Route::resource('payments', AdminStudentPaymentController::class);
+    // Route::post('checkout-amount', [AdminStudentPaymentController::class, 'checkout'])->name('checkout.amount');
+    Route::post('checkout', [AdminStudentPaymentController::class, 'afterPayment'])->name('checkout.credit-card');
+
 
 });
 Route::get('/', [FrontendController::class, 'index']);
@@ -49,7 +63,9 @@ Route::get('/login/admin', [UserController::class, 'loginAdmin'])->name('loginAd
 Route::post('/login/admin', [UserController::class, 'loginSubmit'])->name('admin.login');
 //admin@gmail.com //123456
 
-
+//Route::get('/login/teacher', [TeachersController::class, 'loginTeacher'])->name('loginAdmin');
+//Route::post('/login/teacher', [TeachersController::class, 'loginSubmit'])->name('teacher.login');
+//teacher@gmail.com //123456
 
 
 

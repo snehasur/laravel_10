@@ -78,10 +78,16 @@ class UserController extends Controller
     {
         //
     }
+     /**
+     * login view load for admin
+     */
     public function loginAdmin()
     {        
         return view('backend.admin.login');
     }
+     /**
+     * login for admin
+     */
     public function loginSubmit(Request $request)
      {
 
@@ -106,6 +112,9 @@ class UserController extends Controller
             }
            
      }
+      /**
+     * login out for admin
+     */
      public function logout()
      {
         Session::forget('admin_id');

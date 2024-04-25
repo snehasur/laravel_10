@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Support\Facades\Hash;
 
 
-class AdminStudentController extends Controller
+class AdminTeachersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $students = Student::all();
-        return view('backend.student.index', ['students' => $students]);
+        $datas = Teacher::all();
+        return view('backend.teachers.index', ['datas' => $datas]);
     }
 
     /**
@@ -24,7 +24,7 @@ class AdminStudentController extends Controller
     public function create()
     {
         //
-        return view('backend.student.create');
+        return view('backend.teachers.create');
     }
 
     /**
@@ -32,22 +32,22 @@ class AdminStudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //        
         $password="12345678";
         $request->validate([
             'name' => 'required',   
-            'email' => 'required|email|unique:students',
+            'email' => 'required|email|unique:teachers',
             'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
             'address' => 'required'
         ]);
-        Student::create([
+        Teacher::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($password),
             'phone' => $request->phone,
             'address' => $request->address
         ]);
-        return redirect()->route('admin.students.index')->with('success','Student created successfully.');
+        return redirect()->route('teachers.index')->with('success','Teacher created successfully.');
 
     }
 
@@ -57,8 +57,8 @@ class AdminStudentController extends Controller
     public function show(string $id)
     {
         //
-        $student = Student::find($id);
-        return view('backend.student.show', ['student' => $student]);
+        $data = Teacher::find($id);
+        return view('backend.teachers.show', ['data' => $data]);
     }
 
     /**
@@ -67,8 +67,8 @@ class AdminStudentController extends Controller
     public function edit(string $id)
     {
         //
-        $student = Student::find($id);
-        return view('backend.student.edit', ['student' => $student]);
+        $data = Teacher::find($id);
+        return view('backend.teachers.edit', ['data' => $data]);
     }
 
     /**
@@ -77,18 +77,18 @@ class AdminStudentController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $request->validate([
+         $request->validate([
             'name' => 'required',  
             'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
             'address' => 'required'
         ]);
-        $update=Student::where('id', $id)->update([
+        $update=Teacher::where('id', $id)->update([
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address
         ]);
 
-        return redirect()->route('admin.students.index')->with('success','Student updated successfully.');
+        return redirect()->route('teachers.index')->with('success','Teacher updated successfully.');
     }
 
     /**
@@ -97,8 +97,8 @@ class AdminStudentController extends Controller
     public function destroy(string $id)
     {
         //
-        $student = Student::find($id);
-        $student->delete();
-        return redirect()->route('admin.students.index')->with('success','Student deleted successfully.');
+        $datas = Teacher::find($id);
+        $datas->delete();
+        return redirect()->route('teachers.index')->with('success','Teacher deleted successfully.');
     }
 }

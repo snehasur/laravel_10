@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
+use App\Models\Teacher;
 use Session;
 use Illuminate\Support\Facades\Hash;
-class StudentController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $student = Student::find(Session::get('student_id'));
+        $data = Teacher::find(Session::get('teacher_id'));
 
-        return view('frontend.student.index', ['student' => $student]);
+        return view('frontend.teacher.index', ['teacher' => $data]);
     }
 
     /**
@@ -24,7 +24,7 @@ class StudentController extends Controller
     public function create()
     {
         //
-        return view('frontend.student.create');
+        return view('frontend.teacher.create');
     }
 
     /**
@@ -35,19 +35,19 @@ class StudentController extends Controller
         //
         $request->validate([
             'name' => 'required',   
-            'email' => 'required|email',
+            'email' => 'required|email|unique:teachers',
             'password' => 'required|string|min:8|confirmed',
             'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
             'address' => 'required'
         ]);
-        Student::create([
+        Teacher::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'address' => $request->address
         ]);
-        return redirect('/')->with('success','Student created successfully.');
+        return redirect('/')->with('success','Teacher created successfully.');
 
     }
 
@@ -58,8 +58,8 @@ class StudentController extends Controller
     {
         //
         
-        $student = Student::find($id);
-        return view('frontend.student.show', ['student' => $student]);
+        $data = Teacher::find($id);
+        return view('frontend.teacher.show', ['teacher' => $data]);
     }
 
     /**
@@ -68,8 +68,8 @@ class StudentController extends Controller
     public function edit(string $id)
     {
         //
-        $student = Student::find($id);
-        return view('frontend.student.edit', ['student' => $student]);
+        $data = Teacher::find($id);
+        return view('frontend.teacher.edit', ['teacher' => $data]);
     }
 
     /**
@@ -85,12 +85,12 @@ class StudentController extends Controller
             'phone' => 'required|regex:/^\+(?:[0-9] ?){6,14}[0-9]$/',            
             'address' => 'required'
         ]);
-        $update=Student::where('id', $id)->update([
+        $update=Teacher::where('id', $id)->update([
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address
         ]);
-        return redirect()->route('students.index')->with('success','Student updated successfully.');
+        return redirect()->route('teacher.index')->with('success','Teacher updated successfully.');
     }
 
     /**
@@ -99,14 +99,14 @@ class StudentController extends Controller
     public function destroy(string $id)
     {
         //
-        // $student = Student::find($id);
-        // $student->delete();
-        // return redirect()->route('students.index')->with('success','Student deleted successfully.');
+        // $data = Teacher::find($id);
+        // $data->delete();
+        // return redirect()->route('teacher.index')->with('success','Teacher deleted successfully.');
     }
-    public function loginStudent()
+    public function loginTeacher()
     {        
         //echo "f";die();
-        return view('frontend.student.login');
+        return view('frontend.teacher.login');
     }
     public function loginSubmit(Request $request)
      {
@@ -116,17 +116,17 @@ class StudentController extends Controller
             'password'=> 'required' 
             ]);
             $credentials = $request->only('email', 'password');
-            $customer = Student::where('email', $credentials['email'])->first();
+            $customer = Teacher::where('email', $credentials['email'])->first();
 
 
             if ($customer && Hash::check($credentials['password'], $customer->password)) { 
                 // Authentication successful, redirect to dashboard
-                Session::put('student_id', $customer->id); 
+                Session::put('teacher_id', $customer->id); 
                 Session::put('login', true); 
-                return redirect()->route('students.index')->with('success','Login successfully');
+                return redirect()->route('teachers.index')->with('success','Login successfully');
 
             }else{
-                return redirect()->route('loginStudent')->with('error','invalid Credentials');
+                return redirect()->route('loginTeacher')->with('error','invalid Credentials');
             }
     
             
@@ -136,8 +136,8 @@ class StudentController extends Controller
      }
      public function logout()
      {
-        Session::forget('student_id');
+        Session::forget('teacher_id');
         Session::forget('login');
-        return redirect()->route('loginStudent')->with('success','Logout successfully');
+        return redirect()->route('loginTeacher')->with('success','Logout successfully');
      }
 }

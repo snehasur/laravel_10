@@ -36,19 +36,22 @@
                     <a href="{{route('dashboard.index')}}"><span class="fa fa-users mr-3"></span> Home</a>
                 </li>
                 <li>
-                    <a href="{{route('admin.students.index')}}"><span class="fa fa-users mr-3"></span> Student</a>
+                    <a href="{{route('admin.students.index')}}"><span class="fa fa-users mr-3"></span> Students</a>
                 </li>
                  <li>
-                    <a href="{{route('students.index')}}"><span class="fa fa-users mr-3"></span> Teacher</a>
+                    <a href="{{route('teachers.index')}}"><span class="fa fa-users mr-3"></span> Teachers</a>
                 </li>
                 <li>
-                    <a href=""><span class="fa fa-users mr-3"></span> Courses</a>
+                    <a href="{{route('courses.index')}}"><span class="fa fa-users mr-3"></span> Courses</a>
                 </li>
                 <li>
-                  <a href=""><span class="fa fa-users mr-3"></span> Enrollment</a>
+                  <a href="{{route('batches.index')}}"><span class="fa fa-users mr-3"></span> Batches</a>
                 </li>
                 <li>
-                  <a href=""><span class="fa fa-users mr-3"></span> Payment</a>
+                  <a href="{{route('enrollments.index')}}"><span class="fa fa-users mr-3"></span> Enrollments</a>
+                </li> 
+                <li>
+                  <a href="{{route('payments.index')}}"><span class="fa fa-users mr-3"></span> Payment</a>
                 </li>         
 
                 <li>            
